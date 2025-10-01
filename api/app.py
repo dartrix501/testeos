@@ -1,19 +1,29 @@
-# Vercel Python Serverless
 import json
 
 def handler(request, response):
     try:
-        data = request.json
-        nombre = data.get("nombre")
-        email = data.get("email")
+        # Obtener datos JSON del POST
+        data = request.body
+        if not data:
+            response.status_code = 400
+            response.write(json.dumps({"mensaje": "No se recibieron datos"}))
+            return
 
-        # Aquí ejecutas tu lógica Python
-        print(f"Nombre: {nombre}, Email: {email}")  # se ve en los logs de Vercel
+        # Convertir bytes a JSON
+        json_data = json.loads(data.decode("utf-8"))
 
+        nombre = json_data.get("nombre")
+        email = json_data.get("email")
+
+        # Lógica Python
+        print(f"Nombre: {nombre}, Email: {email}")  # Logs en Vercel
+
+        # Respuesta al frontend
         response.status_code = 200
         response.headers["Content-Type"] = "application/json"
         response.write(json.dumps({"mensaje": f"Datos recibidos: {nombre}, {email}"}))
 
     except Exception as e:
         response.status_code = 500
-        response.write(json.dumps({"mensaje": str(e)}))
+        response.write(json.dumps({"mensaje": f"Error interno: {str(e)}"}))
+
