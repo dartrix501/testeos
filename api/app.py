@@ -2,7 +2,7 @@ import json
 
 def handler(request, response):
     try:
-        # Obtener datos JSON del POST
+        # Obtener datos del POST
         data = request.body
         if not data:
             response.status_code = 400
@@ -16,7 +16,7 @@ def handler(request, response):
         email = json_data.get("email")
 
         # Lógica Python
-        print(f"Nombre: {nombre}, Email: {email}")  # Logs en Vercel
+        print(f"Nombre: {nombre}, Email: {email}")  # Logs de Vercel
 
         # Respuesta al frontend
         response.status_code = 200
@@ -26,4 +26,3 @@ def handler(request, response):
     except Exception as e:
         response.status_code = 500
         response.write(json.dumps({"mensaje": f"Error interno: {str(e)}"}))
-

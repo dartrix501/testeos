@@ -2,8 +2,7 @@
 <html>
 
 <head>
-    <meta charset="utf-8">
-    <title>Formulario</title>
+    <title>Formulario de Contacto</title>
 </head>
 
 <body>
@@ -24,7 +23,7 @@
             const data = Object.fromEntries(formData.entries());
 
             try {
-                const res = await fetch("/api/app.py", {
+                const res = await fetch("/api/app", {
                     method: "POST",
                     headers: { "Content-Type": "application/json" },
                     body: JSON.stringify(data)
@@ -38,7 +37,6 @@
                 alert("Error enviando datos");
             }
         });
-
     </script>
 </body>
 
