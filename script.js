@@ -7,7 +7,7 @@ form.addEventListener("submit", async (e) => {
     const email = document.getElementById("email").value;
 
     try {
-        const res = await fetch("https://api-test-2hpy.onrender.com/procesar", {
+        const res = await fetch("https://api-test-2hpy.onrender.com", {
             method: "POST",
             headers: { "Content-Type": "application/json" },
             body: JSON.stringify({ nombre, email })
